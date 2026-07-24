@@ -1,0 +1,42 @@
+openapi: 3.1.0
+info:
+  title: Sommelier Finance Integrations Protocol API
+  description: 'Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault ("cellar") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ "Response": ... }` envelope. Currently supports the `ethereum` network.'
+  version: 1.0.0
+  x-generated-from: https://api.sommelier.finance/ (official API Information page)
+servers:
+- url: https://api.sommelier.finance
+  description: Production
+tags:
+- name: Protocol
+  description: Protocol-wide metrics such as total value locked.
+paths:
+  /tvl:
+    get:
+      operationId: getTvl
+      summary: Get total value locked
+      description: Returns the total value locked (TVL) across all cellars.
+      tags:
+      - Protocol
+      responses:
+        '200':
+          description: Aggregate TVL figures.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    properties:
+                      total_tvl:
+                        type: number
+                      eth-tvl:
+                        type: number
+                      other-chain-tvl:
+                        type: number
+              example:
+                Response:
+                  total_tvl: 123456789.0
+                  eth-tvl: 98765432.1
+                  other-chain-tvl: 24681012.0

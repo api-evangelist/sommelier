@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: Sommelier Finance Integrations Vault Data API
+  description: 'Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault ("cellar") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ "Response": ... }` envelope. Currently supports the `ethereum` network.'
+  version: 1.0.0
+  x-generated-from: https://api.sommelier.finance/ (official API Information page)
+servers:
+- url: https://api.sommelier.finance
+  description: Production
+tags:
+- name: Vault Data
+  description: Daily and hourly performance snapshots of Sommelier vaults (cellars).
+paths:
+  /dailyData/{network}/{vaultAddress}/{startUnixTimestamp}/{endUnixTimestamp}:
+    get:
+      operationId: getDailyData
+      summary: Get daily vault data
+      description: Returns daily snapshots of a vault, captured at midnight UTC. Includes the daily APY (already decimal-adjusted), share price, base-asset price, total assets and USD-denominated TVL for each day in the requested range.
+      tags:
+      - Vault Data
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/VaultAddress'
+      - $ref: '#/components/parameters/StartUnixTimestamp'
+      - $ref: '#/components/parameters/EndUnixTimestamp'
+      responses:
+        '200':
+          description: Array of daily snapshots wrapped in the Response envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DailySnapshot'
+              example:
+                Response:
+                - block_number: 18002283
+                  cellar_address: '0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec'
+                  daily_apy: 75.01029330056662
+                  price_usd: '1646.089999999999918145476840436458587646484375'
+                  share_price: 1.0342082927801795
+                  timestamp: Sun, 27 Aug 2023 00:00:00 GMT
+                  total_assets: '7709.674497742499402588'
+                  tvl: '12690818.09398895021053435119'
+                  unix_seconds: 1693094400
+  /dailyData/{network}/allCellars/{startUnixTimestamp}/{endUnixTimestamp}:
+    get:
+      operationId: getAllCellarsDailyData
+      summary: Get daily data for all cellars
+      description: Returns daily snapshots for every cellar on the network, keyed by cellar address. Each value is an array of daily snapshots (without the cellar_address field, which becomes the map key).
+      tags:
+      - Vault Data
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/StartUnixTimestamp'
+      - $ref: '#/components/parameters/EndUnixTimestamp'
+      responses:
+        '200':
+          description: Map of cellar address to an array of daily snapshots.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DailySnapshot'
+  /hourlyData/{network}/{vaultAddress}/{startUnixTimestamp}/{endUnixTimestamp}:
+    get:
+      operationId: getHourlyData
+      summary: Get hourly vault data
+      description: Returns hourly snapshots of a vault. Parameters are identical to the daily data endpoint; the response does not include an APY value.
+      tags:
+      - Vault Data
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/VaultAddress'
+      - $ref: '#/components/parameters/StartUnixTimestamp'
+      - $ref: '#/components/parameters/EndUnixTimestamp'
+      responses:
+        '200':
+          description: Array of hourly snapshots wrapped in the Response envelope.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HourlySnapshot'
+  /snapshot/{network}/{cellarAddress}:
+    get:
+      operationId: getSnapshot
+      summary: Get a cellar snapshot
+      description: Returns a point-in-time snapshot for a specific cellar, including USD TVL, base-asset TVL, the SOMM price, SOMM emissions per day and the SOMM incentive APY.
+      tags:
+      - Vault Data
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/CellarAddress'
+      responses:
+        '200':
+          description: Cellar snapshot.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    properties:
+                      usd_tvl:
+                        type: number
+                      base_asset_tvl:
+                        type: number
+                      somm_price_usd:
+                        type: number
+                      somm_per_day:
+                        type: number
+                      somm_incentive_apy:
+                        type: number
+components:
+  parameters:
+    EndUnixTimestamp:
+      name: endUnixTimestamp
+      in: path
+      required: true
+      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      schema:
+        type: string
+    Network:
+      name: network
+      in: path
+      required: true
+      description: 'The network the vault is on. Currently supports: ethereum.'
+      schema:
+        type: string
+        enum:
+        - ethereum
+    CellarAddress:
+      name: cellarAddress
+      in: path
+      required: true
+      description: The address of the cellar.
+      schema:
+        type: string
+    VaultAddress:
+      name: vaultAddress
+      in: path
+      required: true
+      description: The address of the vault you want data for.
+      schema:
+        type: string
+    StartUnixTimestamp:
+      name: startUnixTimestamp
+      in: path
+      required: true
+      description: The unix timestamp of the start of the data you want.
+      schema:
+        type: integer
+  schemas:
+    HourlySnapshot:
+      type: object
+      description: An hourly snapshot of a vault (no APY).
+      properties:
+        block_number:
+          type: integer
+        cellar_address:
+          type: string
+        price_usd:
+          type: string
+        share_price:
+          type: number
+        timestamp:
+          type: string
+        total_assets:
+          type: string
+        tvl:
+          type: string
+        unix_seconds:
+          type: integer
+    DailySnapshot:
+      type: object
+      description: A daily snapshot of a vault captured at midnight UTC.
+      properties:
+        block_number:
+          type: integer
+          description: Block number of the snapshot.
+        cellar_address:
+          type: string
+          description: Address of the vault.
+        daily_apy:
+          type: number
+          description: APY of the vault on that day (decimal-adjusted; 13.5 means 13.5%).
+        price_usd:
+          type: string
+          description: Price of the base asset of the vault in USD at the timestamp.
+        share_price:
+          type: number
+          description: Share price of the vault at the timestamp.
+        timestamp:
+          type: string
+          description: Human-readable datetime of the snapshot.
+        total_assets:
+          type: string
+          description: Decimal-adjusted TVL in terms of the base asset.
+        tvl:
+          type: string
+          description: USD-denominated TVL of the vault.
+        unix_seconds:
+          type: integer
+          description: The timestamp of the snapshot in unix seconds.

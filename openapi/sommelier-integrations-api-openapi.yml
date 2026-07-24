@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Sommelier Finance Integrations API
+  description: 'Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault ("cellar") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ "Response": ... }` envelope. Currently supports the `ethereum` network.'
+  version: 1.0.0
+  x-generated-from: https://api.sommelier.finance/ (official API Information page)
+servers:
+- url: https://api.sommelier.finance
+  description: Production
+tags:
+- name: Integrations
+  description: Integration-specific datasets (Kelp, ether.fi).
+paths:
+  /kelp/{chain}/{cellarAddress}/{blockNumber}:
+    get:
+      operationId: getKelpData
+      summary: Get Kelp data for a cellar
+      description: Returns Kelp point data for a specific cellar at a given block number.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/Chain'
+      - $ref: '#/components/parameters/CellarAddress'
+      - $ref: '#/components/parameters/BlockNumber'
+      responses:
+        '200':
+          description: Map of address to Kelp value.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    additionalProperties:
+                      type: number
+  /etherfi/{network}/{userAddress}:
+    get:
+      operationId: getEtherfiUser
+      summary: Get ether.fi data for a user
+      description: Returns ether.fi loyalty and EigenLayer point data for a specific user address on the given network.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/UserAddress'
+      responses:
+        '200':
+          description: ether.fi points for the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                      eigenlayerPoints:
+                        type: number
+                      loyaltyPoints:
+                        type: number
+  /etherfi/{network}:
+    get:
+      operationId: getEtherfiAll
+      summary: Get ether.fi data for all users
+      description: Returns ether.fi point data for all users on the given network.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      responses:
+        '200':
+          description: ether.fi point data for all users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+  /etherfi/{network}/balances/{blockNumber}:
+    get:
+      operationId: getEtherfiBalances
+      summary: Get ether.fi balances at a block
+      description: Returns ether.fi balances data for a specific block number on the given network.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - $ref: '#/components/parameters/BlockNumber'
+      responses:
+        '200':
+          description: ether.fi balances at the block.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    properties:
+                      balances:
+                        type: object
+                        additionalProperties:
+                          type: number
+  /etherfi/{network}/balances:
+    get:
+      operationId: getEtherfiBalancesLatest
+      summary: Get latest ether.fi balances
+      description: Returns ether.fi balances data for the latest block on the given network.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      responses:
+        '200':
+          description: Latest ether.fi balances.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Response:
+                    type: object
+                    properties:
+                      balances:
+                        type: object
+                        additionalProperties:
+                          type: number
+components:
+  parameters:
+    UserAddress:
+      name: userAddress
+      in: path
+      required: true
+      description: The address of the user.
+      schema:
+        type: string
+    Chain:
+      name: chain
+      in: path
+      required: true
+      description: The blockchain network (e.g., ethereum).
+      schema:
+        type: string
+    BlockNumber:
+      name: blockNumber
+      in: path
+      required: true
+      description: The block number to query.
+      schema:
+        type: integer
+    Network:
+      name: network
+      in: path
+      required: true
+      description: 'The network the vault is on. Currently supports: ethereum.'
+      schema:
+        type: string
+        enum:
+        - ethereum
+    CellarAddress:
+      name: cellarAddress
+      in: path
+      required: true
+      description: The address of the cellar.
+      schema:
+        type: string
