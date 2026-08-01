@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sommelier Finance API
+  version: 1.0.0
+extends: openapi/sommelier-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enrichment: local-v1
+      x-apievangelist-generated: '2026-07-21'
+      x-auth-model: public-no-auth
+  - target: $.info
+    update:
+      x-response-envelope: Response
+  - target: $.tags
+    update:
+      - name: Vault Data
+        description: Daily and hourly performance snapshots of Sommelier vaults (cellars).
+      - name: Protocol
+        description: Protocol-wide metrics such as total value locked.
+      - name: Integrations
+        description: Integration-specific datasets (Kelp, ether.fi).

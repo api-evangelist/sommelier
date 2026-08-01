@@ -1,8 +1,28 @@
 aid: sommelier
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sommelier.png
 name: Sommelier
-description: 'Sommelier is a company surfaced as a portfolio company of multicoin-capital and added to
-  the API Evangelist network as a stub for enrichment. Sector: crypto-web3. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Sommelier (rebranding to "Somm") is a decentralized asset-management and DeFi
+  vault protocol whose smart-contract "cellars" run automated yield strategies
+  on Ethereum. It publishes a public, read-only HTTP API that exposes on-chain
+  vault performance data — daily and hourly snapshots (APY, TVL, share price,
+  total assets), protocol-wide total value locked, per-cellar snapshots, and
+  integration datasets for Kelp and ether.fi points and balances. All endpoints
+  are unauthenticated GET requests with path-based parameters and a
+  { "Response": ... } envelope; the API currently serves the ethereum network.
+  Backed by Multicoin Capital.
 url: https://raw.githubusercontent.com/api-evangelist/sommelier/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,11 +32,59 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Crypto Web3
-apis: []
+- DeFi
+- Blockchain
+- Ethereum
+- Vaults
+- Yield
+- Analytics
+apis:
+- aid: sommelier:sommelier-integrations-api
+  name: Sommelier Integrations API
+  description: Integration-specific datasets (Kelp, ether.fi).
+  humanURL: https://api.sommelier.finance/
+  baseURL: https://api.sommelier.finance
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/sommelier-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://api.sommelier.finance/
+  - type: APIReference
+    url: https://api.sommelier.finance/
+- aid: sommelier:sommelier-protocol-api
+  name: Sommelier Protocol API
+  description: Protocol-wide metrics such as total value locked.
+  humanURL: https://api.sommelier.finance/
+  baseURL: https://api.sommelier.finance
+  tags:
+  - Protocol
+  properties:
+  - type: OpenAPI
+    url: openapi/sommelier-protocol-api-openapi.yml
+  - type: Documentation
+    url: https://api.sommelier.finance/
+  - type: APIReference
+    url: https://api.sommelier.finance/
+- aid: sommelier:sommelier-vault-data-api
+  name: Sommelier Vault Data API
+  description: Daily and hourly performance snapshots of Sommelier vaults (cellars).
+  humanURL: https://api.sommelier.finance/
+  baseURL: https://api.sommelier.finance
+  tags:
+  - Vault Data
+  properties:
+  - type: OpenAPI
+    url: openapi/sommelier-vault-data-api-openapi.yml
+  - type: Documentation
+    url: https://api.sommelier.finance/
+  - type: APIReference
+    url: https://api.sommelier.finance/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,4 +92,29 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://sommelier.finance
+  url: https://www.somm.finance
+- type: DeveloperPortal
+  url: https://api.sommelier.finance/
+- type: DomainSecurity
+  url: security/sommelier-domain-security.yml
+- type: Authentication
+  url: authentication/sommelier-authentication.yml
+- type: Conventions
+  url: conventions/sommelier-conventions.yml
+- type: DataModel
+  url: data-model/sommelier-data-model.yml
+- type: Conformance
+  url: conformance/sommelier-conformance.yml
+- type: MCPServer
+  url: mcp/sommelier-mcp.yml
+- type: LLMsTxt
+  url: llms/sommelier-llms.txt
+- type: Overlay
+  url: overlays/sommelier-api-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1

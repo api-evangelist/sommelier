@@ -1,0 +1,18 @@
+{
+  "provider": "sommelier",
+  "sources": [
+    "sommelier-integrations-api-openapi.yml",
+    "sommelier-protocol-api-openapi.yml",
+    "sommelier-vault-data-api-openapi.yml"
+  ],
+  "outputs": [
+    "sommelier-integrations-api-openapi.yml",
+    "sommelier-protocol-api-openapi.yml",
+    "sommelier-vault-data-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

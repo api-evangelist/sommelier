@@ -1,0 +1,39 @@
+# Sommelier (Somm) Finance API
+
+> Sommelier — rebranding to "Somm" — is a decentralized asset-management / DeFi
+> vault protocol. Its public, read-only HTTP API exposes on-chain vault
+> ("cellar") performance data: daily and hourly snapshots (APY, TVL, share
+> price, total assets), protocol-wide total value locked, per-cellar snapshots,
+> and integration datasets (Kelp, ether.fi points and balances). All endpoints
+> are unauthenticated GETs with path-based parameters and a `{ "Response": ... }`
+> envelope. Currently supports the `ethereum` network.
+
+## API
+
+- [Sommelier Finance API (info page)](https://api.sommelier.finance/): Official documentation of the public data API.
+
+## Specs
+
+- [OpenAPI 3.1 (generated)](openapi/sommelier-api-openapi.yml): Faithful OpenAPI captured from the official API Information page.
+
+## Endpoints
+
+- [Daily vault data](https://api.sommelier.finance/dailyData/ethereum/{vault}/{start}/{end}): Daily APY/TVL/share-price snapshots.
+- [All cellars daily data](https://api.sommelier.finance/dailyData/ethereum/allCellars/{start}/{end}): Daily data for every cellar.
+- [Hourly vault data](https://api.sommelier.finance/hourlyData/ethereum/{vault}/{start}/{end}): Hourly snapshots (no APY).
+- [Total value locked](https://api.sommelier.finance/tvl): Protocol-wide TVL.
+- [Cellar snapshot](https://api.sommelier.finance/snapshot/ethereum/{cellar}): SOMM price/emissions/incentive APY + TVL.
+- [Kelp data](https://api.sommelier.finance/kelp/ethereum/{cellar}/{block}): Kelp points per address.
+- [ether.fi user](https://api.sommelier.finance/etherfi/ethereum/{user}): ether.fi loyalty/EigenLayer points.
+- [ether.fi balances](https://api.sommelier.finance/etherfi/ethereum/balances): Latest ether.fi balances.
+
+## Artifacts
+
+- [Conventions](conventions/sommelier-conventions.yml): Response envelope, path params, no-auth, read-only semantics.
+- [Data model](data-model/sommelier-data-model.yml): Cellar / snapshot / ether.fi entity graph.
+- [Authentication](authentication/sommelier-authentication.yml): Public, no-auth model.
+- [MCP tools (candidate)](mcp/sommelier-mcp.yml): One tool per operation.
+
+## Docs
+
+- [Website (Somm)](https://www.somm.finance): Protocol site (sommelier.finance redirects here).

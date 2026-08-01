@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sommelier-api-openapi.yml
+standards:
+  - id: rest
+    conforms: true
+    evidence: Resource-style HTTP GET endpoints over JSON.
+  - id: openapi-3.1
+    conforms: true
+    evidence: Captured as an OpenAPI 3.1.0 document (generated from official docs).
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth; API is public and unauthenticated.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No application/problem+json error envelope documented.
+  - id: json-api
+    conforms: false
+    evidence: Custom single-key `Response` envelope, not JSON:API.
+  - id: pagination
+    conforms: false
+    evidence: Ranges via path timestamps; no cursor/offset pagination.
+  - id: idempotency
+    conforms: false
+    evidence: Read-only GET API; no idempotency contract.

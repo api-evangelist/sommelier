@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/sommelier-api-openapi.yml
+note: >-
+  No official hosted/remote MCP server was found for Sommelier. This is a
+  candidate tool list derived one-to-one from the public API operations; a
+  server could wrap these read-only endpoints without auth.
+server:
+  name: sommelier
+  transport: http
+tools:
+  - name: get_daily_data
+    description: Get daily snapshots (APY, TVL, share price) for a vault over a time range.
+    source_operation: openapi/sommelier-api-openapi.yml#getDailyData
+  - name: get_all_cellars_daily_data
+    description: Get daily snapshots for all cellars on a network over a time range.
+    source_operation: openapi/sommelier-api-openapi.yml#getAllCellarsDailyData
+  - name: get_hourly_data
+    description: Get hourly snapshots for a vault over a time range.
+    source_operation: openapi/sommelier-api-openapi.yml#getHourlyData
+  - name: get_tvl
+    description: Get total value locked across all cellars.
+    source_operation: openapi/sommelier-api-openapi.yml#getTvl
+  - name: get_snapshot
+    description: Get a point-in-time snapshot for a cellar (TVL, SOMM price/emissions/APY).
+    source_operation: openapi/sommelier-api-openapi.yml#getSnapshot
+  - name: get_kelp_data
+    description: Get Kelp point data for a cellar at a block.
+    source_operation: openapi/sommelier-api-openapi.yml#getKelpData
+  - name: get_etherfi_user
+    description: Get ether.fi loyalty/EigenLayer points for a user address.
+    source_operation: openapi/sommelier-api-openapi.yml#getEtherfiUser
+  - name: get_etherfi_all
+    description: Get ether.fi point data for all users on a network.
+    source_operation: openapi/sommelier-api-openapi.yml#getEtherfiAll
+  - name: get_etherfi_balances
+    description: Get ether.fi balances at a specific block.
+    source_operation: openapi/sommelier-api-openapi.yml#getEtherfiBalances
+  - name: get_etherfi_balances_latest
+    description: Get the latest ether.fi balances.
+    source_operation: openapi/sommelier-api-openapi.yml#getEtherfiBalancesLatest

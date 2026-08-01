@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sommelier-api-openapi.yml + https://api.sommelier.finance/
+authentication:
+  style: none
+  detail: Public, unauthenticated GET API. See authentication/sommelier-authentication.yml.
+response_envelope:
+  shape: object
+  wrapper_field: Response
+  detail: >-
+    Every endpoint returns a JSON object with a single top-level `Response` key.
+    Its value is an array (daily/hourly data), an object keyed by cellar address
+    (allCellars), or a flat metrics object (tvl, snapshot, etherfi).
+parameters:
+  style: path
+  detail: >-
+    All inputs are supplied as URL path segments (network, vault/cellar address,
+    unix timestamps, block number) rather than query strings or a request body.
+  network_values: [ethereum]
+  latest_keyword: >-
+    The end-timestamp path segment accepts the literal `latest` to request all
+    data up to the present time.
+pagination:
+  supported: false
+  detail: >-
+    No cursor/offset pagination. Time-series ranges are bounded by the
+    start/end unix-timestamp path parameters instead.
+idempotency:
+  supported: false
+  detail: >-
+    Not applicable — the API is entirely read-only (GET). There are no
+    state-changing operations and no idempotency-key contract.
+versioning:
+  scheme: none-documented
+  detail: >-
+    No version prefix in the base path and no documented versioning or
+    deprecation policy. Endpoints are addressed directly under the API host.
+rate_limiting:
+  documented: false
+  detail: No published rate-limit headers or quotas. Assume best-effort public access.
+error_handling:
+  documented: false
+  detail: >-
+    The API Information page documents only 200 success shapes; no error
+    envelope, problem+json format, or error-code registry is published.
+cross_links:
+  authentication: authentication/sommelier-authentication.yml
+  data_model: data-model/sommelier-data-model.yml
+  openapi: openapi/sommelier-api-openapi.yml

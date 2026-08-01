@@ -1,0 +1,15 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sommelier-api-openapi.yml + https://api.sommelier.finance/
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+  public: true
+notes: >-
+  The Sommelier Finance API is a public, read-only HTTP API. No securitySchemes
+  are declared in the spec and the official API Information page documents no
+  API keys, tokens, or OAuth. All endpoints are open GET requests with
+  path-based parameters. Consumers should treat this as an unauthenticated,
+  best-effort public data API and apply their own rate-limit / retry handling.
+schemes: []

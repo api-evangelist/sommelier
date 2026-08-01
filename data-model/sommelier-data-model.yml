@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sommelier-api-openapi.yml
+entities:
+  - name: Cellar
+    aka: Vault
+    description: >-
+      An on-chain Sommelier vault, identified by its Ethereum contract address.
+      The central entity; all time-series and snapshot data hangs off a cellar.
+    id_field: cellar_address
+    id_format: ethereum-address
+  - name: DailySnapshot
+    description: A vault snapshot captured at midnight UTC, including APY and TVL.
+    keyed_by: [cellar_address, unix_seconds]
+  - name: HourlySnapshot
+    description: An hourly vault snapshot (no APY).
+    keyed_by: [cellar_address, unix_seconds]
+  - name: CellarSnapshot
+    description: >-
+      Point-in-time cellar metrics including SOMM price, emissions per day and
+      SOMM incentive APY.
+    keyed_by: [cellar_address]
+  - name: EtherfiUser
+    description: ether.fi loyalty and EigenLayer point data for a user address.
+    id_field: address
+    id_format: ethereum-address
+  - name: EtherfiBalance
+    description: ether.fi balance per address at a given block.
+    keyed_by: [address, block_number]
+  - name: KelpEntry
+    description: Kelp point value per address for a cellar at a block.
+    keyed_by: [address, block_number]
+relationships:
+  - from: DailySnapshot
+    to: Cellar
+    type: belongs_to
+    via: cellar_address
+  - from: HourlySnapshot
+    to: Cellar
+    type: belongs_to
+    via: cellar_address
+  - from: CellarSnapshot
+    to: Cellar
+    type: belongs_to
+    via: cellar_address
+  - from: Cellar
+    to: DailySnapshot
+    type: has_many
+    via: cellar_address
+  - from: Cellar
+    to: HourlySnapshot
+    type: has_many
+    via: cellar_address
+notes: >-
+  Addresses (cellar/vault, user) are Ethereum 0x addresses used as natural keys.
+  Time series are indexed by unix_seconds; the protocol currently exposes data
+  for the ethereum network only.

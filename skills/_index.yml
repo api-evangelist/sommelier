@@ -1,0 +1,7 @@
+generated: '2026-07-21'
+method: generated
+skills:
+  - file: sommelier-vault-performance.md
+    name: Track Sommelier vault performance
+    api: openapi/sommelier-api-openapi.yml
+    operations: [getTvl, getSnapshot, getDailyData, getHourlyData, getAllCellarsDailyData]
