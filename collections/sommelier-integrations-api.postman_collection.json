@@ -1,0 +1,540 @@
+{
+  "item": [
+    {
+      "id": "50f630d4-6825-489a-83a6-9927ee90e4d9",
+      "name": "Integrations",
+      "description": {
+        "content": "Integration-specific datasets (Kelp, ether.fi).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19130726-0836-4d16-846f-c81f79fdc6b3",
+          "name": "Get Kelp data for a cellar",
+          "request": {
+            "name": "Get Kelp data for a cellar",
+            "description": {
+              "content": "Returns Kelp point data for a specific cellar at a given block number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kelp",
+                ":chain",
+                ":cellarAddress",
+                ":blockNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chain",
+                  "description": "(Required) The blockchain network (e.g., ethereum)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cellarAddress",
+                  "description": "(Required) The address of the cellar."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "blockNumber",
+                  "description": "(Required) The block number to query."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bbc5156-5f9f-444b-ac70-96f7b30ae2c8",
+              "name": "Map of address to Kelp value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kelp",
+                    ":chain",
+                    ":cellarAddress",
+                    ":blockNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chain",
+                      "description": "(Required) The blockchain network (e.g., ethereum)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cellarAddress",
+                      "description": "(Required) The address of the cellar."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "blockNumber",
+                      "description": "(Required) The block number to query."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"key_0\": 8326.331190259021\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8011475e-2144-4c30-a90c-2356751ce740",
+          "name": "Get ether.fi data for a user",
+          "request": {
+            "name": "Get ether.fi data for a user",
+            "description": {
+              "content": "Returns ether.fi loyalty and EigenLayer point data for a specific user address on the given network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "etherfi",
+                ":network",
+                ":userAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userAddress",
+                  "description": "(Required) The address of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49525063-4914-412d-8633-1205e5d0137f",
+              "name": "ether.fi points for the user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "etherfi",
+                    ":network",
+                    ":userAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userAddress",
+                      "description": "(Required) The address of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"address\": \"string\",\n    \"eigenlayerPoints\": 7910.21120348682,\n    \"loyaltyPoints\": 8808.259729431944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59eb14d5-624a-4f3d-80bc-bcadda581a2e",
+          "name": "Get ether.fi data for all users",
+          "request": {
+            "name": "Get ether.fi data for all users",
+            "description": {
+              "content": "Returns ether.fi point data for all users on the given network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "etherfi",
+                ":network"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87da7f6a-3248-499e-89cf-4b7210c1d0e6",
+              "name": "ether.fi point data for all users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "etherfi",
+                    ":network"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66132202-58ff-412e-bf30-3984645d15fe",
+          "name": "Get ether.fi balances at a block",
+          "request": {
+            "name": "Get ether.fi balances at a block",
+            "description": {
+              "content": "Returns ether.fi balances data for a specific block number on the given network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "etherfi",
+                ":network",
+                "balances",
+                ":blockNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "blockNumber",
+                  "description": "(Required) The block number to query."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9931d373-3672-4ca8-9f9a-8bebba4e0a73",
+              "name": "ether.fi balances at the block.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "etherfi",
+                    ":network",
+                    "balances",
+                    ":blockNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "blockNumber",
+                      "description": "(Required) The block number to query."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"balances\": {\n      \"key_0\": 1090.596881245528\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bc11eda-06e8-4c96-8a8d-3ca4bdbbce32",
+          "name": "Get latest ether.fi balances",
+          "request": {
+            "name": "Get latest ether.fi balances",
+            "description": {
+              "content": "Returns ether.fi balances data for the latest block on the given network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "etherfi",
+                ":network",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f82a98a8-c431-4504-bae3-21565343eb37",
+              "name": "Latest ether.fi balances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "etherfi",
+                    ":network",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"balances\": {\n      \"key_0\": 1090.596881245528\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sommelier.finance",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ba28caa9-fab0-445d-b838-aaed32de0a2c",
+    "name": "Sommelier Finance Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault (\"cellar\") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ \"Response\": ... }` envelope. Currently supports the `ethereum` network.",
+      "type": "text/plain"
+    }
+  }
+}

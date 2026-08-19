@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sommelier Finance Integrations Vault Data API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vault Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get daily vault data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sommelier.finance/dailyData/:network/:vaultAddress/:startUnixTimestamp/:endUnixTimestamp",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The network the vault is on. Currently supports: ethereum."
+              },
+              {
+                "name": "vaultAddress",
+                "value": "",
+                "type": "path",
+                "description": "The address of the vault you want data for."
+              },
+              {
+                "name": "startUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the start of the data you want."
+              },
+              {
+                "name": "endUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+              }
+            ]
+          },
+          "docs": "Returns daily snapshots of a vault, captured at midnight UTC. Includes the daily APY (already decimal-adjusted), share price, base-asset price, total assets and USD-denominated TVL for each day in the requested range."
+        },
+        {
+          "info": {
+            "name": "Get daily data for all cellars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sommelier.finance/dailyData/:network/allCellars/:startUnixTimestamp/:endUnixTimestamp",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The network the vault is on. Currently supports: ethereum."
+              },
+              {
+                "name": "startUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the start of the data you want."
+              },
+              {
+                "name": "endUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+              }
+            ]
+          },
+          "docs": "Returns daily snapshots for every cellar on the network, keyed by cellar address. Each value is an array of daily snapshots (without the cellar_address field, which becomes the map key)."
+        },
+        {
+          "info": {
+            "name": "Get hourly vault data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sommelier.finance/hourlyData/:network/:vaultAddress/:startUnixTimestamp/:endUnixTimestamp",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The network the vault is on. Currently supports: ethereum."
+              },
+              {
+                "name": "vaultAddress",
+                "value": "",
+                "type": "path",
+                "description": "The address of the vault you want data for."
+              },
+              {
+                "name": "startUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the start of the data you want."
+              },
+              {
+                "name": "endUnixTimestamp",
+                "value": "",
+                "type": "path",
+                "description": "The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+              }
+            ]
+          },
+          "docs": "Returns hourly snapshots of a vault. Parameters are identical to the daily data endpoint; the response does not include an APY value."
+        },
+        {
+          "info": {
+            "name": "Get a cellar snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sommelier.finance/snapshot/:network/:cellarAddress",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The network the vault is on. Currently supports: ethereum."
+              },
+              {
+                "name": "cellarAddress",
+                "value": "",
+                "type": "path",
+                "description": "The address of the cellar."
+              }
+            ]
+          },
+          "docs": "Returns a point-in-time snapshot for a specific cellar, including USD TVL, base-asset TVL, the SOMM price, SOMM emissions per day and the SOMM incentive APY."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

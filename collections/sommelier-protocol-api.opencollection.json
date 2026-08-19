@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sommelier Finance Integrations Protocol API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Protocol",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get total value locked",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sommelier.finance/tvl"
+          },
+          "docs": "Returns the total value locked (TVL) across all cellars."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

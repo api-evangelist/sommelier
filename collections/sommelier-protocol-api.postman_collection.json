@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "f5957853-3298-4be9-8864-7e53b9f2ed7b",
+      "name": "Protocol",
+      "description": {
+        "content": "Protocol-wide metrics such as total value locked.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c48fab9-f7fa-4e34-a574-1611b18d7665",
+          "name": "Get total value locked",
+          "request": {
+            "name": "Get total value locked",
+            "description": {
+              "content": "Returns the total value locked (TVL) across all cellars.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tvl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "909252cf-16c4-4d54-8923-c4e763a5c82d",
+              "name": "Aggregate TVL figures.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tvl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"total_tvl\": 123456789,\n    \"eth-tvl\": 98765432.1,\n    \"other-chain-tvl\": 24681012\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sommelier.finance",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "88e893c7-e453-4a64-9143-ece71728e311",
+    "name": "Sommelier Finance Integrations Protocol API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault (\"cellar\") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ \"Response\": ... }` envelope. Currently supports the `ethereum` network.",
+      "type": "text/plain"
+    }
+  }
+}

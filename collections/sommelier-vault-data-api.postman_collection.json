@@ -1,0 +1,530 @@
+{
+  "item": [
+    {
+      "id": "b0af5e2a-363e-4d57-8331-41bc10826805",
+      "name": "Vault Data",
+      "description": {
+        "content": "Daily and hourly performance snapshots of Sommelier vaults (cellars).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6bff9de3-bbee-4bf0-845d-44c2eada3110",
+          "name": "Get daily vault data",
+          "request": {
+            "name": "Get daily vault data",
+            "description": {
+              "content": "Returns daily snapshots of a vault, captured at midnight UTC. Includes the daily APY (already decimal-adjusted), share price, base-asset price, total assets and USD-denominated TVL for each day in the requested range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dailyData",
+                ":network",
+                ":vaultAddress",
+                ":startUnixTimestamp",
+                ":endUnixTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vaultAddress",
+                  "description": "(Required) The address of the vault you want data for."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the start of the data you want."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8719ddd4-c567-4026-b50a-a3b7424c3cb3",
+              "name": "Array of daily snapshots wrapped in the Response envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dailyData",
+                    ":network",
+                    ":vaultAddress",
+                    ":startUnixTimestamp",
+                    ":endUnixTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vaultAddress",
+                      "description": "(Required) The address of the vault you want data for."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the start of the data you want."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": [\n    {\n      \"block_number\": 18002283,\n      \"cellar_address\": \"0xb5b29320d2Dde5BA5BAFA1EbcD270052070483ec\",\n      \"daily_apy\": 75.01029330056662,\n      \"price_usd\": \"1646.089999999999918145476840436458587646484375\",\n      \"share_price\": 1.0342082927801795,\n      \"timestamp\": \"Sun, 27 Aug 2023 00:00:00 GMT\",\n      \"total_assets\": \"7709.674497742499402588\",\n      \"tvl\": \"12690818.09398895021053435119\",\n      \"unix_seconds\": 1693094400\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1621aa54-c65a-479b-a542-693a2cf266ab",
+          "name": "Get daily data for all cellars",
+          "request": {
+            "name": "Get daily data for all cellars",
+            "description": {
+              "content": "Returns daily snapshots for every cellar on the network, keyed by cellar address. Each value is an array of daily snapshots (without the cellar_address field, which becomes the map key).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dailyData",
+                ":network",
+                "allCellars",
+                ":startUnixTimestamp",
+                ":endUnixTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the start of the data you want."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9916cf70-6e85-40cb-8f06-a16eb42f6c83",
+              "name": "Map of cellar address to an array of daily snapshots.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dailyData",
+                    ":network",
+                    "allCellars",
+                    ":startUnixTimestamp",
+                    ":endUnixTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the start of the data you want."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"key_0\": [\n      {\n        \"block_number\": 6116,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 327.06161299652314,\n        \"price_usd\": \"string\",\n        \"share_price\": 3617.9099917580315,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 4195\n      },\n      {\n        \"block_number\": 5194,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 5774.3391460361545,\n        \"price_usd\": \"string\",\n        \"share_price\": 3304.8498211231313,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 9601\n      }\n    ],\n    \"key_1\": [\n      {\n        \"block_number\": 4962,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 1503.2671387217345,\n        \"price_usd\": \"string\",\n        \"share_price\": 1157.2021244466403,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 3477\n      },\n      {\n        \"block_number\": 9092,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 403.38910579855394,\n        \"price_usd\": \"string\",\n        \"share_price\": 545.3774983276616,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 3098\n      }\n    ],\n    \"key_2\": [\n      {\n        \"block_number\": 1948,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 129.17561585841787,\n        \"price_usd\": \"string\",\n        \"share_price\": 7399.881419475966,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 3968\n      },\n      {\n        \"block_number\": 4488,\n        \"cellar_address\": \"string\",\n        \"daily_apy\": 6033.847615042492,\n        \"price_usd\": \"string\",\n        \"share_price\": 3071.208197651322,\n        \"timestamp\": \"string\",\n        \"total_assets\": \"string\",\n        \"tvl\": \"string\",\n        \"unix_seconds\": 8483\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6917035-45c9-40ff-81e8-24c07aa36a32",
+          "name": "Get hourly vault data",
+          "request": {
+            "name": "Get hourly vault data",
+            "description": {
+              "content": "Returns hourly snapshots of a vault. Parameters are identical to the daily data endpoint; the response does not include an APY value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hourlyData",
+                ":network",
+                ":vaultAddress",
+                ":startUnixTimestamp",
+                ":endUnixTimestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vaultAddress",
+                  "description": "(Required) The address of the vault you want data for."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "startUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the start of the data you want."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endUnixTimestamp",
+                  "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f1c39d5-e104-4a4c-ba65-196933b5a2a8",
+              "name": "Array of hourly snapshots wrapped in the Response envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hourlyData",
+                    ":network",
+                    ":vaultAddress",
+                    ":startUnixTimestamp",
+                    ":endUnixTimestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vaultAddress",
+                      "description": "(Required) The address of the vault you want data for."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "startUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the start of the data you want."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endUnixTimestamp",
+                      "description": "(Required) The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": [\n    {\n      \"block_number\": 8972,\n      \"cellar_address\": \"string\",\n      \"price_usd\": \"string\",\n      \"share_price\": 6807.030344511072,\n      \"timestamp\": \"string\",\n      \"total_assets\": \"string\",\n      \"tvl\": \"string\",\n      \"unix_seconds\": 6706\n    },\n    {\n      \"block_number\": 7448,\n      \"cellar_address\": \"string\",\n      \"price_usd\": \"string\",\n      \"share_price\": 3020.05681273774,\n      \"timestamp\": \"string\",\n      \"total_assets\": \"string\",\n      \"tvl\": \"string\",\n      \"unix_seconds\": 8608\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d4270db-a1dd-4663-9f30-87fdf97f54f3",
+          "name": "Get a cellar snapshot",
+          "request": {
+            "name": "Get a cellar snapshot",
+            "description": {
+              "content": "Returns a point-in-time snapshot for a specific cellar, including USD TVL, base-asset TVL, the SOMM price, SOMM emissions per day and the SOMM incentive APY.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshot",
+                ":network",
+                ":cellarAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cellarAddress",
+                  "description": "(Required) The address of the cellar."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3974acd-3f0c-487a-a876-0d4e422816b1",
+              "name": "Cellar snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshot",
+                    ":network",
+                    ":cellarAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The network the vault is on. Currently supports: ethereum."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cellarAddress",
+                      "description": "(Required) The address of the cellar."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Response\": {\n    \"usd_tvl\": 5638.828433423259,\n    \"base_asset_tvl\": 5673.280481250931,\n    \"somm_price_usd\": 7273.447764507395,\n    \"somm_per_day\": 9183.979949197013,\n    \"somm_incentive_apy\": 2174.510706762928\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sommelier.finance",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f42022f3-d3a4-4267-baf3-9d8a4557f09e",
+    "name": "Sommelier Finance Integrations Vault Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault (\"cellar\") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ \"Response\": ... }` envelope. Currently supports the `ethereum` network.",
+      "type": "text/plain"
+    }
+  }
+}
