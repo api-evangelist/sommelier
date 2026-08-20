@@ -39,6 +39,15 @@ tags:
 - DeFi
 - Blockchain
 - Ethereum
+- Vault
+- Yield
+- Analytics
+tags_raw:
+- Company
+- Crypto Web3
+- DeFi
+- Blockchain
+- Ethereum
 - Vaults
 - Yield
 - Analytics
@@ -49,6 +58,8 @@ apis:
   humanURL: https://api.sommelier.finance/
   baseURL: https://api.sommelier.finance
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
