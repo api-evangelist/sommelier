@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sommelier Finance Integrations Vault Data API
+  title: Sommelier Finance Vault Data API
   description: 'Public, read-only REST API for the Sommelier (Somm) DeFi vault protocol. Exposes on-chain vault ("cellar") performance data — daily and hourly snapshots (APY, TVL, share price, total assets), protocol-wide total value locked, per-cellar snapshots, and integration-specific datasets (Kelp, ether.fi points and balances). All endpoints are unauthenticated HTTP GETs with path-based parameters and a common `{ "Response": ... }` envelope. Currently supports the `ethereum` network.'
   version: 1.0.0
   x-generated-from: https://api.sommelier.finance/ (official API Information page)
@@ -128,11 +128,11 @@ paths:
                         type: number
 components:
   parameters:
-    EndUnixTimestamp:
-      name: endUnixTimestamp
+    CellarAddress:
+      name: cellarAddress
       in: path
       required: true
-      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      description: The address of the cellar.
       schema:
         type: string
     Network:
@@ -144,20 +144,6 @@ components:
         type: string
         enum:
         - ethereum
-    CellarAddress:
-      name: cellarAddress
-      in: path
-      required: true
-      description: The address of the cellar.
-      schema:
-        type: string
-    VaultAddress:
-      name: vaultAddress
-      in: path
-      required: true
-      description: The address of the vault you want data for.
-      schema:
-        type: string
     StartUnixTimestamp:
       name: startUnixTimestamp
       in: path
@@ -165,27 +151,21 @@ components:
       description: The unix timestamp of the start of the data you want.
       schema:
         type: integer
+    VaultAddress:
+      name: vaultAddress
+      in: path
+      required: true
+      description: The address of the vault you want data for.
+      schema:
+        type: string
+    EndUnixTimestamp:
+      name: endUnixTimestamp
+      in: path
+      required: true
+      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      schema:
+        type: string
   schemas:
-    HourlySnapshot:
-      type: object
-      description: An hourly snapshot of a vault (no APY).
-      properties:
-        block_number:
-          type: integer
-        cellar_address:
-          type: string
-        price_usd:
-          type: string
-        share_price:
-          type: number
-        timestamp:
-          type: string
-        total_assets:
-          type: string
-        tvl:
-          type: string
-        unix_seconds:
-          type: integer
     DailySnapshot:
       type: object
       description: A daily snapshot of a vault captured at midnight UTC.
@@ -217,3 +197,23 @@ components:
         unix_seconds:
           type: integer
           description: The timestamp of the snapshot in unix seconds.
+    HourlySnapshot:
+      type: object
+      description: An hourly snapshot of a vault (no APY).
+      properties:
+        block_number:
+          type: integer
+        cellar_address:
+          type: string
+        price_usd:
+          type: string
+        share_price:
+          type: number
+        timestamp:
+          type: string
+        total_assets:
+          type: string
+        tvl:
+          type: string
+        unix_seconds:
+          type: integer
