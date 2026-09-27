@@ -128,11 +128,18 @@ paths:
                         type: number
 components:
   parameters:
-    CellarAddress:
-      name: cellarAddress
+    EndUnixTimestamp:
+      name: endUnixTimestamp
       in: path
       required: true
-      description: The address of the cellar.
+      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      schema:
+        type: string
+    VaultAddress:
+      name: vaultAddress
+      in: path
+      required: true
+      description: The address of the vault you want data for.
       schema:
         type: string
     Network:
@@ -151,18 +158,11 @@ components:
       description: The unix timestamp of the start of the data you want.
       schema:
         type: integer
-    VaultAddress:
-      name: vaultAddress
+    CellarAddress:
+      name: cellarAddress
       in: path
       required: true
-      description: The address of the vault you want data for.
-      schema:
-        type: string
-    EndUnixTimestamp:
-      name: endUnixTimestamp
-      in: path
-      required: true
-      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      description: The address of the cellar.
       schema:
         type: string
   schemas:

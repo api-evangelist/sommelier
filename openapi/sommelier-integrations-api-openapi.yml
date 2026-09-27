@@ -131,11 +131,11 @@ paths:
                           type: number
 components:
   parameters:
-    CellarAddress:
-      name: cellarAddress
+    Chain:
+      name: chain
       in: path
       required: true
-      description: The address of the cellar.
+      description: The blockchain network (e.g., ethereum).
       schema:
         type: string
     UserAddress:
@@ -152,13 +152,6 @@ components:
       description: The block number to query.
       schema:
         type: integer
-    Chain:
-      name: chain
-      in: path
-      required: true
-      description: The blockchain network (e.g., ethereum).
-      schema:
-        type: string
     Network:
       name: network
       in: path
@@ -168,3 +161,10 @@ components:
         type: string
         enum:
         - ethereum
+    CellarAddress:
+      name: cellarAddress
+      in: path
+      required: true
+      description: The address of the cellar.
+      schema:
+        type: string
