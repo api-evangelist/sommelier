@@ -53,6 +53,8 @@ tags:
 - Vault
 - Yield
 - Analytics
+- Web3
+- Cryptocurrency
 tags_raw:
 - Company
 - Crypto Web3
@@ -62,6 +64,8 @@ tags_raw:
 - Vaults
 - Yield
 - Analytics
+- Web3
+- Cryptocurrency
 apis:
 - aid: sommelier:sommelier-integrations-api
   name: Sommelier Integrations API
