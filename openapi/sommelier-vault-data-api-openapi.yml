@@ -128,6 +128,22 @@ paths:
                         type: number
 components:
   parameters:
+    EndUnixTimestamp:
+      name: endUnixTimestamp
+      in: path
+      required: true
+      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
+      schema:
+        type: string
+    Network:
+      name: network
+      in: path
+      required: true
+      description: 'The network the vault is on. Currently supports: ethereum.'
+      schema:
+        type: string
+        enum:
+        - ethereum
     StartUnixTimestamp:
       name: startUnixTimestamp
       in: path
@@ -142,13 +158,6 @@ components:
       description: The address of the cellar.
       schema:
         type: string
-    EndUnixTimestamp:
-      name: endUnixTimestamp
-      in: path
-      required: true
-      description: The unix timestamp of the end of the data you want. Replace with the word `latest` to get all data up to the present time.
-      schema:
-        type: string
     VaultAddress:
       name: vaultAddress
       in: path
@@ -156,36 +165,7 @@ components:
       description: The address of the vault you want data for.
       schema:
         type: string
-    Network:
-      name: network
-      in: path
-      required: true
-      description: 'The network the vault is on. Currently supports: ethereum.'
-      schema:
-        type: string
-        enum:
-        - ethereum
   schemas:
-    HourlySnapshot:
-      type: object
-      description: An hourly snapshot of a vault (no APY).
-      properties:
-        block_number:
-          type: integer
-        cellar_address:
-          type: string
-        price_usd:
-          type: string
-        share_price:
-          type: number
-        timestamp:
-          type: string
-        total_assets:
-          type: string
-        tvl:
-          type: string
-        unix_seconds:
-          type: integer
     DailySnapshot:
       type: object
       description: A daily snapshot of a vault captured at midnight UTC.
@@ -217,3 +197,23 @@ components:
         unix_seconds:
           type: integer
           description: The timestamp of the snapshot in unix seconds.
+    HourlySnapshot:
+      type: object
+      description: An hourly snapshot of a vault (no APY).
+      properties:
+        block_number:
+          type: integer
+        cellar_address:
+          type: string
+        price_usd:
+          type: string
+        share_price:
+          type: number
+        timestamp:
+          type: string
+        total_assets:
+          type: string
+        tvl:
+          type: string
+        unix_seconds:
+          type: integer

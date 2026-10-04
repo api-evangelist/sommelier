@@ -131,20 +131,15 @@ paths:
                           type: number
 components:
   parameters:
-    UserAddress:
-      name: userAddress
+    Network:
+      name: network
       in: path
       required: true
-      description: The address of the user.
+      description: 'The network the vault is on. Currently supports: ethereum.'
       schema:
         type: string
-    CellarAddress:
-      name: cellarAddress
-      in: path
-      required: true
-      description: The address of the cellar.
-      schema:
-        type: string
+        enum:
+        - ethereum
     BlockNumber:
       name: blockNumber
       in: path
@@ -159,12 +154,17 @@ components:
       description: The blockchain network (e.g., ethereum).
       schema:
         type: string
-    Network:
-      name: network
+    CellarAddress:
+      name: cellarAddress
       in: path
       required: true
-      description: 'The network the vault is on. Currently supports: ethereum.'
+      description: The address of the cellar.
       schema:
         type: string
-        enum:
-        - ethereum
+    UserAddress:
+      name: userAddress
+      in: path
+      required: true
+      description: The address of the user.
+      schema:
+        type: string
